@@ -11,7 +11,10 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $with = ['category'];
+    protected $with = [
+        'category',
+        'tags',
+    ];
 
     public function getRouteKeyName() : string
     {
