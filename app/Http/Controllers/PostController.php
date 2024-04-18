@@ -31,6 +31,16 @@ class PostController extends Controller
         ]);
     }
 
+    public function postsByTag (Tag $tag) : View
+    {
+        return view('posts.index',[
+            // 'posts' => $category -> posts()->paginate (10),
+            'posts' => Post::whereRelation(
+                'tags', 'tags.id', $tag->id
+            )->latest()->paginate (10),
+        ]);
+    }
+
     public function show(Post $post) : View
     {
         return view('posts.show',[
