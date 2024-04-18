@@ -14,10 +14,19 @@ use Illuminate\View\View;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $posts = Post::query();
+
+        if($search = $request->search){
+            $posts->where(fn (Builder $query)=>$query
+            ->where('title', 'LIKE', '%'.$search.'%')
+            ->orWhere('content', 'LIKE', '%'.$search.'%')
+        );
+    }
+
         return view('posts.index',[
-            'posts' => Post::latest()-> paginate(10),
+            'posts' => $posts->latest()-> paginate(10),
         ]);
     }
 
