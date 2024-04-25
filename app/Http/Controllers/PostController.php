@@ -14,6 +14,11 @@ use Illuminate\View\View;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->only('comment');
+    }
+
     public function index(Request $request): View
     {
         return $this->postsView($request->search ? ['search' => $request->search] : []);
@@ -42,5 +47,20 @@ class PostController extends Controller
             'post' => $post,
         ]
         );
+    }
+
+    public function comment(Post $post, Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'comment' => ['required', 'string', 'between:2,255'],
+        ]);
+
+        Comment::create([
+            'content' => $validated['comment'],
+            'post_id' => $post->id,
+            'user_id' => Auth::id(),
+        ]);
+
+        return back()->withStatus('Commentaire publié !');
     }
 }
