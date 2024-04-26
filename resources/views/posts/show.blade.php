@@ -3,7 +3,7 @@
                     
         <x-post :$post />
         @auth    
-            <form action="{{ route('posts.comment',['post=>$post']) }}" method="POST">
+            <form action="{{ route('posts.comment',['post'=>$post]) }}" method="POST">
 
                 @csrf
                 <div class="flex h-12">
