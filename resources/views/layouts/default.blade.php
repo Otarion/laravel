@@ -63,7 +63,9 @@
                     tabindex="-1"
                 >
                 @auth
-                <li><a href="{{ route('login') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Mon compte</a></li>
+                <li><a href="{{ route('home') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Mon compte</a></li>
+                <li>
+                <li><a href="{{ route('admin.posts.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Gestion des articles</a></li>
                 <li>
 
                 <li><a href="{{ route('logout') }}" @click.prevent="$refs.logout.submit()" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Déconnexion</a></li>
