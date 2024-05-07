@@ -62,18 +62,19 @@
                     ])
                     tabindex="-1"
                 >
-                @auth
+                    @auth
                 <li><a href="{{ route('home') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Mon compte</a></li>
+                    @if(Auth::user()->isAdmin())
                 <li>
                 <li><a href="{{ route('admin.posts.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Gestion des articles</a></li>
+                @endif
                 <li>
-
                 <li><a href="{{ route('logout') }}" @click.prevent="$refs.logout.submit()" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Déconnexion</a></li>
                 <li>
                     <form x-ref="logout" action="{{ route('logout') }}" method="POST" class="hidden">
                         @csrf
                     </form>
-                @else
+                    @else
                     <li><a href="{{ route('login') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Connexion</a></li>
                     <li>
                         <a href="{{ route('register') }}" class="flex items-center px-4 py-2 font-semibold text-sm text-indigo-700 hover:bg-gray-100">
