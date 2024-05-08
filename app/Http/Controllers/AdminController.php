@@ -89,6 +89,9 @@ class AdminController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        Storage::delete($post->thumbnail);
+        $post->delete();
+
+        return redirect()->route('admin.posts.index');
     }
 }
