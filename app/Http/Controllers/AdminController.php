@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostRequest;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class AdminController extends Controller
 {
@@ -37,9 +39,17 @@ class AdminController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        $validated['thumbnail'] = $validated ['thumbnail']->store('thumbnails');
+        $validated['excerpt'] = Str::limit($validated['content'], 150);
+
+        $post = Post::create($validated);
+        $post->tags()->sync($validated['tag_ids'] ?? null);
+
+        return redirect()->route('posts.show', ['post'=>$post])->withStatus('Post publié !');
     }
 
     public function edit(Post $post)

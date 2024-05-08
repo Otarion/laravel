@@ -11,7 +11,7 @@
                     <x-input name="slug" label="Slug" help="Laisser vide pour un slug auto. Si une valeur est renseignée, elle sera slugifiée avant d'être soumise à validation."/>
                     <x-textarea name="content" label="Contenu du post"></x-textarea>
                     {{-- input file thumbnail --}}
-                    <x-input name="thumbnail" type="file" label="Image de couverture"/>
+                    <x-input name="thumbnail" type="file" label="Vignette"/>
                     {{-- select category_id --}}
                     <x-select name="category_id" label="Catégorie" :list="$categories"/>
                     {{-- select multiple tag_ids --}}
