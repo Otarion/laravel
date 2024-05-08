@@ -47,6 +47,10 @@ class Post extends Model
         }
     }
 
+    public function exists(): bool
+    {
+        return (bool) $this->id; 
+    }
     public function category():BelongsTo
     {
         return $this->belongsTo(Category::class);
